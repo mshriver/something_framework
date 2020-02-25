@@ -1,0 +1,5 @@
+[pytest11]
+something = something.pytest_components.pytest_plugin
+
+[console_scripts]
+smth=something.scripting.smth:smth
