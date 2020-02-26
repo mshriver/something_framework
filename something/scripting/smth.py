@@ -8,6 +8,7 @@ import click
 # We can add main methods imported from other modules as well that are decorated for click
 
 from something.scripting.smth_shell import main as smth_shell_main
+from something.scripting.container import main as container_main  # this one has its own group
 
 
 @click.group()
@@ -16,6 +17,7 @@ def smth():
 
 
 smth.add_command(smth_shell_main, name='shell')
+smth.add_command(container_main, name='container')
 
 
 # `smth` is available via entrypoints, so this is legacy for direct use

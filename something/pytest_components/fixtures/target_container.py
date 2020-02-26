@@ -1,10 +1,10 @@
-from collections import namedtuple
-import docker
 import pytest
+
+from something.utils.target_container import ContainerParams
+from something.utils.target_container import create_docker_container
 
 
 # Create a simple data type for test parametrization
-ContainerParams = namedtuple('ContainerParams', ['image', 'tag'])
 CONTAINER_DEFAULTS = ContainerParams('centos', '7')
 
 
@@ -19,13 +19,9 @@ def target_container(request):
 
     # Default to a template name, but support indirect parametrization for customization
     image_data = getattr(request, 'param', CONTAINER_DEFAULTS)
-    docker_client = docker.from_env()
-    container = docker_client.run(f'{image_data.image}:{image_data.tag}',
-                                  'tail -f /dev/null',
-                                  detach=True)
-
-    yield container, docker_client  # the test might want to do something with these
+    container, docker_client = create_docker_container(image_data)
+    yield container, docker_client
 
     # Fixture should handle cleanup of the test resource
-    docker_client.stop()
+    container.stop()
 

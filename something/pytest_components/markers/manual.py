@@ -41,4 +41,4 @@ def pytest_collection_modifyitems(config, items):
             discard.append(item)
 
     items[:] = keep  # rewrite items with the keep list
-    config.hook.pytest_deselected(items.discard)  # reporting hook for cases that were deselected
+    config.hook.pytest_deselected(items=discard)  # reporting hook for cases that were deselected

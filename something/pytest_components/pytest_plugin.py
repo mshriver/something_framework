@@ -4,6 +4,6 @@
 # the included modules will be loaded by pytest
 pytest_plugins = [
     'something.pytest_components.markers.manual',
-    'something.pytest_components.fixtures.something',
-    'something.pytest_components.fixtures.test_target'
+    'something.pytest_components.fixtures.target_container',
+    #'something.pytest_components.fixtures.something',
 ]
