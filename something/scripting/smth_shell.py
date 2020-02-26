@@ -12,11 +12,12 @@ DEFAULT_IMPORTS = [
 def main():
     ipython = TerminalInteractiveShell.instance()
     for import_statement in DEFAULT_IMPORTS:
-        print(f'> {import_statement}')
+        click.echo(f'> {import_statement}')
         ipython.run_cell(import_statement)
         # This can be improved to read a default conf file location
         # So that users can write their own default imports for their local clone
-        ipython.interact()
+
+    ipython.interact()
 
 
 if __name__ == '__main__':
