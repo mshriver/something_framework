@@ -10,11 +10,11 @@ from something.utils.target_container import ContainerParams
 
 
 @click.group(help='Functions for interacting with target container')
-def main():
+def container():
     pass
 
 
-@main.command('checkout', help="create a detached test target container")
+@container.command('checkout', help="create a detached test target container")
 @click.option('--image', default='centos', help="Image name for container source")
 @click.option('--tag', default='latest', help="Image tag for container source")
 @click.option('--command', default='tail -f /dev/null', help='Command to run on container')
@@ -41,4 +41,4 @@ def checkout(image, tag, command):
 
 
 if __name__ == "__main__":
-    main()
+    container()

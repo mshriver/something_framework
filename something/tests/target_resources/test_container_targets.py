@@ -40,7 +40,8 @@ def test_custom_target_containers(target_container):
     global module_scope_container_id
     container, docker_client = target_container
     container.reload()
-    assert module_scope_container_id != container.id  # its not the same container from the default test
+    # its not the same container from the default test
+    assert module_scope_container_id != container.id
     assert container.attrs['State']['Status'] == 'running'
     assert container.attrs['State']['Running']
     assert 'centos' in container.image.tags[0]

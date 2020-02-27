@@ -2,7 +2,7 @@ import click
 from IPython.terminal.interactiveshell import TerminalInteractiveShell
 
 DEFAULT_IMPORTS = [
-    'import something.base.someapp',
+    'from something.utils.target_container import create_docker_container',
     'from pprint import pformat',
     # Add other useful default imports for your project
 ]
