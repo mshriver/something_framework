@@ -9,7 +9,13 @@ CONTAINER_DEFAULTS = ContainerParams('centos', '7')
 
 
 @pytest.fixture(scope='module')
-def target_container(request):
+def container_command(request):
+    command = getattr(request, 'param', 'tail -f /dev/null')
+    return command
+
+
+@pytest.fixture(scope='module')
+def target_container(request, container_command):
     """Deploy a container on the local env, using parametrized image and tag names
     Use ContainerParams namedtuple to parametrize for this fixture
     """
@@ -19,7 +25,7 @@ def target_container(request):
 
     # Default to a template name, but support indirect parametrization for customization
     image_data = getattr(request, 'param', CONTAINER_DEFAULTS)
-    container, docker_client = create_docker_container(image_data)
+    container, docker_client = create_docker_container(image_data, container_command)
     yield container, docker_client
 
     # Fixture should handle cleanup of the test resource
